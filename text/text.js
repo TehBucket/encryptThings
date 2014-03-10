@@ -14,8 +14,51 @@ var toASCII = function(q){
 	return arr;
 }
 
-var scramble = function(x, z){
+var fromASCII = function(q){
+	var str = '';
+	for(var i = 0;i<q.length;i++){
+		console.log(String.fromCharCode(q[i]));
+		str += String.fromCharCode(q[i]);
+	}
+	return str;
+	console.log(str);
+}
 
+var scramble = function(x, p){
+	var L = x.length;
+	var i = 0;
+	//scrambles according to p
+	for(var ii = 0;ii<L;ii++){
+		var value = x[i];
+		var next = (value*p) - 1 + i;
+		while(next >= L){
+			next = next - L;	
+			}
+		x[i] = x[next];
+		x[next] = value;
+		console.log('this: '+value+' loc: '+i+' newLoc: '+next);
+		console.log(x);
+		i = next;
+
+		}
+		
+		return x;
+	//maths each integer by p
+	//for(var i = 0;i<L;i++){
+		//x[i] = x[i]+p;
+	//	}
+	//throws in a dummy integer every p places
+	//for(var i = 0;i<L;i++){
+		//if(i/p == 
+	//	}
+	
+/* 	return x;
+	// maths each integer by p
+	for(var i = 0;i<L;i++){
+		x[i] = x[i]+p;
+		}
+		
+	return x; */
 }
 
 var getMean = function(x){
@@ -36,12 +79,14 @@ var multiplyArr = function(x, z){
 var encrypt = function(q, password){
 	var e;
 	var c = toASCII(q);
-	var pass = getMean(toASCII(password));
+	var pass = Math.floor(getMean(toASCII(password)));
 	
 	console.log(pass);
-	output.innerHTML = c;
 	
 	c = scramble(c, pass);
+	
+	output.innerHTML = c;
+	output.innerHTML = fromASCII(c);
 }
 
 //String.fromCharCode(e[i])
